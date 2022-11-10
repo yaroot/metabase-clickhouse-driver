@@ -1,4 +1,5 @@
 (ns metabase.driver.clickhouse
+  "Driver for ClickHouse databases"
   (:require [clojure.java.jdbc :as jdbc]
             [clojure.string :as str]
             [honeysql
