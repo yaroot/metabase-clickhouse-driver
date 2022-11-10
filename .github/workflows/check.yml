@@ -53,6 +53,7 @@ jobs:
       - name: Build ClickHouse driver
         run: |
           find modules/drivers/clickhouse/src
+          bin/build-driver.sh sqlite
           bin/build-driver.sh clickhouse
       - name: Archive driver JAR
         uses: actions/upload-artifact@v2
