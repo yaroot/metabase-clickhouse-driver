@@ -69,7 +69,7 @@
   [_ {:keys [user password dbname host port ssl]
       :or   {user "default", password "", dbname "default", host "localhost", port "8123"}
       :as   details}]
-  (-> {:classname                      "ru.yandex.clickhouse.ClickHouseDriver"
+  (-> {:classname                      "com.clickhouse.jdbc.ClickHouseDriver"
        :subprotocol                    "clickhouse"
        :subname                        (str "//" host ":" port "/" dbname)
        :password                       password
