@@ -21,11 +21,11 @@
             [metabase.mbql.schema :as mbql.s]
             [metabase.util.honeysql-extensions :as hx]
             [schema.core :as s])
-  (:import [ru.yandex.clickhouse.util ClickHouseArrayUtil]
-           [java.sql DatabaseMetaData PreparedStatement ResultSet ResultSetMetaData Time Types]
+  (:import [java.sql DatabaseMetaData PreparedStatement ResultSet ResultSetMetaData Time Types]
            [java.time Instant LocalDate LocalDateTime LocalTime OffsetDateTime OffsetTime ZonedDateTime]
            [java.time.temporal Temporal]
            [java.util TimeZone]))
+;(:import [ru.yandex.clickhouse.util ClickHouseArrayUtil])
 
 (driver/register! :clickhouse, :parent :sql-jdbc)
 
@@ -385,10 +385,10 @@
 (defmethod sql-jdbc.execute/read-column-thunk [:clickhouse Types/TIME] [_ ^ResultSet rs ^ResultSetMetaData rsmeta ^Integer i]
   (.getObject rs i OffsetTime))
 
-(defmethod sql-jdbc.execute/read-column [:clickhouse Types/ARRAY] [driver calendar resultset meta i]
-  (when-let [arr (.getArray resultset i)]
-    (let [tz (if (nil? calendar) (TimeZone/getDefault) (.getTimeZone calendar))]
-      (ClickHouseArrayUtil/arrayToString (.getArray arr) tz tz))))
+;(defmethod sql-jdbc.execute/read-column [:clickhouse Types/ARRAY] [driver calendar resultset meta i]
+;  (when-let [arr (.getArray resultset i)]
+;    (let [tz (if (nil? calendar) (TimeZone/getDefault) (.getTimeZone calendar))]
+;      (ClickHouseArrayUtil/arrayToString (.getArray arr) tz tz))))
 
 (defn- get-tables
   "Fetch a JDBC Metadata ResultSet of tables in the DB, optionally limited to ones belonging to a given schema."
